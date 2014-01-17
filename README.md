@@ -2,7 +2,7 @@ Welcome to the DigiByte Android Project
 
 This project is stored in two folders.
 
-digibytej - This is the base Java Library for GoldCoin.
+digibytej - This is the base Java Library for Digibyte.
 digibyte-wallet - This is the Android App
 This app was forked originally from the Bitcoin Wallet App. 
 
