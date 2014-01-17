@@ -1,0 +1,23 @@
+Ayez vos digibytes toujours avec vous dans votre poche ! Payez rapidement en numérisant un code-QR. En tant que marchant vous recevez les paiements de manière fiable et instantanée. digibyte Wallet est la première appli digibyte mobile et sans doute aussi la plus sécuritaire !
+
+
+FONCTIONS :
+
+• Pas d'inscription, de service Web ou de nuage de nécessaire ! Ce portefeuille est décentralisé et de pair-à-pair.
+• Affichage du montant de digibyte en DGB et DGB.
+• Conversion de et vers des devises nationales.
+• Envoi et réception des digibyte via NFC, codes QR ou des URLs digibyte.
+• Carnet d'adresse pour les adresses digibyte utilisées régulièrement.
+• Quand vous êtes hors-ligne vous pouvez quand même payez via Bluetooth.
+• Notification du système pour les pièces reçues.
+• Widget affichant le solde Bitcoin.
+
+Vous pouvez en apprendre plus au sujet de digibyte sur
+http://digibyte.co
+
+Si vous voulez contribuer à digibyte Wallet, le projet se trouve sur
+https://github.com/digibyte/android/digibyte-wallet
+
+Licence : GPLv3
+Utilisez à vos propres risques !
+http://www.gnu.org/licenses/gpl-3.0.fr.html

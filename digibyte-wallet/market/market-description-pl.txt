@@ -1,0 +1,20 @@
+Samodzielny portfel digibyte dla Twojego urządzenia Android. Możesz wysyłać digibyte pomiędzy telefonami skanując kod QR, który jest wyświetlany przez aplikacje, lub przez NFC (Near Field Communication).
+
+FUNKCJE:
+
+• Wyświetlanie stanu konta portfela w digibyte i rożnych innych walutach.
+• Wysyłanie i odbieranie digibyte przez NFC, kod QR albo digibyte URL.
+• Książka adresowa dla regularnie używanych adresów digibyte.
+• Możliwość dodania transakcji offline, wykonywanych po połączeniu z siecią.
+• Notyfikacje systemowe o połączeniu z siecią digibyte i otrzymanych monetach.
+• Widget na stan konta digibyte.
+
+Więcej o digibyte dowiesz się pod adresem:
+http://digibyte.co
+
+Jeżeli chcesz wesprzeć digibyte Wallet, kody źródłowe projektu znajdują się pod adresem:
+https://github.com/digibyte/android/digibyte-wallet
+
+Licencja: GPLv3
+Używanie jedynie na własne ryzyko!
+http://www.gnu.org/licenses/gpl-3.0.en.html

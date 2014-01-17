@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string-array name="preferences_precision_labels">
+		<item>DGB, 8 dígitos</item>
+		<item>DGB, 6 dígitos</item>
+		<item>DGB, 4 dígitos</item>
+		<item>mDGB, 2 dígitos</item>
+	</string-array>
+
+</resources>

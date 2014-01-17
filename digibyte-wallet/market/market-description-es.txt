@@ -1,0 +1,20 @@
+Consiste en una cartera de digibytes para tu dispositivo Android. Puedes enviar digibytes entre teléfonos haciendo explorar los códigos QR que muestra la aplicación o mediante NFC (Near Field Communication).
+
+CARACTERÍSTICAS:
+
+• Visualización del saldo de la cartera en digibyte y en otras monedas.
+• Envío y recpción de digibytes a través de NFC, códigos QR o URL digibyte.
+• Libreta de direcciones para guardar las direcciones digibyte utilizadas habitualmente.
+• Las transacciones se pueden llevar a cabo sin conexión, ejecutándose al recuperar la conexión.
+• Notificaciones de sistema para la conectividad a la red digibyte y para la recepción de digibytes.
+• Widget de aplicación para el saldo digibyte.
+
+Puedes descubrir más sobre digibyte en
+http://digibyte.co
+
+Si quieres contribuir a digibyte Wallet, el proyecto está localizado en
+https://github.com/digibyte/android/digibyte-wallet
+
+Licencia: GPLv3
+¡Úsalo bajo tu propia responsabilidad!
+http://www.gnu.org/licenses/gpl-3.0.en.html

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+# Check if the jar has been built.
+if [ ! -e target/digibytej-tools-*.jar ] || [[ "$ALWAYS_BUILD_WALLETTOOL" != "" ]]; then
+  echo "Compiling WalletTool to a JAR"
+  cd ../core
+  mvn install -DskipTests
+  cd ../tools
+  [ -e target/digibytej-tools-*.jar ] && rm target/digibytej-tools-*.jar
+  mvn package -DskipTests
+fi
+
+java -server -jar target/digibytej-tools-*.jar $*
