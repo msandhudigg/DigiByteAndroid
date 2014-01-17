@@ -8,4 +8,4 @@ This app was forked originally from the Bitcoin Wallet App.
 
 Development was done with IntelliJ IDEA 12.1.4. Open the digibytej project to open all projects with proper linking.
 
-This file system also contains the maven files. If used, they may not build correctly.
+This file system also contains the maven files. They should work correctly but test will fail. append -Dmaven.test.skip=true to the command line.
