@@ -796,12 +796,24 @@ public abstract class AbstractBlockChain {
     private void checkDifficultyTransitions(StoredBlock storedPrev, Block nextBlock) throws BlockStoreException, VerificationException {
         checkState(lock.isLocked());
         Block prev = storedPrev.getHeader();
-
-        int nTargetTimespan =  params.targetTimespan;
-        int interval =(nTargetTimespan / params.TARGET_SPACING);
-
+		
+		int nHeight = (storedPrev.getHeight() + 1);
+		//log.error("block height: {}", nHeight);
+		boolean fNewDifficultyProtocol = (nHeight >= CoinDefinition.nDiffChangeTarget);
+		
+        int retargetTimespan = CoinDefinition.TARGET_TIMESPAN;
+		int retargetSpacing =  CoinDefinition.TARGET_SPACING;
+        int retargetInterval = CoinDefinition.INTERVAL;
+		
+		if(fNewDifficultyProtocol) {
+			retargetTimespan = CoinDefinition.TARGET_TIMESPAN_2;
+			retargetSpacing =  CoinDefinition.TARGET_SPACING_2;
+			retargetInterval = CoinDefinition.INTERVAL_2;
+			//log.error("inside the new diff adjustment {} {} {}", retargetTimespan,retargetSpacing,retargetInterval);
+		}	
+			
         // Is this supposed to be a difficulty transition point?
-        if ((storedPrev.getHeight() + 1) % interval != 0)
+        if ((storedPrev.getHeight() + 1) % retargetInterval != 0)
         {
 
             // TODO: Refactor this hack after 0.5 is released and we stop supporting deserialization compatibility.
@@ -816,7 +828,7 @@ public abstract class AbstractBlockChain {
             if (nextBlock.getDifficultyTarget() != prev.getDifficultyTarget())
                 throw new VerificationException("Unexpected change in difficulty at height " + storedPrev.getHeight() +
                         ": " + Long.toHexString(nextBlock.getDifficultyTarget()) + " vs " +
-                        Long.toHexString(prev.getDifficultyTarget()) + ", Interval: "+interval);
+                        Long.toHexString(prev.getDifficultyTarget()) + ", Interval: "+retargetInterval);
             return;
         }
 
@@ -825,9 +837,9 @@ public abstract class AbstractBlockChain {
         long now = System.currentTimeMillis();
         StoredBlock cursor = blockStore.get(prev.getHash());
 
-        int goBack = interval - 1;
-        if (cursor.getHeight()+1 != interval)
-            goBack = interval;
+        int goBack = retargetInterval - 1;
+        if (cursor.getHeight()+1 != retargetInterval)
+            goBack = retargetInterval;
 
         for (int i = 0; i < goBack; i++) {
             if (cursor == null) {
@@ -848,18 +860,19 @@ public abstract class AbstractBlockChain {
         int nActualTimespan = (int) (prev.getTimeSeconds() - blockIntervalAgo.getTimeSeconds());
         // Limit the adjustment step.
 
-        //int nActualTimespanMax = fNewDifficultyProtocol? (nTargetTimespanCurrent*2) : (nTargetTimespanCurrent*4);
-        //int nActualTimespanMin = fNewDifficultyProtocol? (nTargetTimespanCurrent/2) : (nTargetTimespanCurrent/4);
-
-
-        if (nActualTimespan < nTargetTimespan/4)
-            nActualTimespan = nTargetTimespan/4;
-        if (nActualTimespan > nTargetTimespan*4)
-            nActualTimespan = nTargetTimespan*4;
+		if(fNewDifficultyProtocol) {
+			//log.error("inside the new diff adjustment 2");
+			if (nActualTimespan < (retargetTimespan - (retargetTimespan/4)) ) nActualTimespan = (retargetTimespan - (retargetTimespan/4));
+			if (nActualTimespan > (retargetTimespan + (retargetTimespan/2)) ) nActualTimespan = (retargetTimespan + (retargetTimespan/2));
+		}
+		else {
+			if (nActualTimespan < retargetTimespan/4) nActualTimespan = retargetTimespan/4;
+			if (nActualTimespan > retargetTimespan*4) nActualTimespan = retargetTimespan*4;
+		}
 
         BigInteger newDifficulty = Utils.decodeCompactBits(prev.getDifficultyTarget());
         newDifficulty = newDifficulty.multiply(BigInteger.valueOf(nActualTimespan));
-        newDifficulty = newDifficulty.divide(BigInteger.valueOf(nTargetTimespan));
+        newDifficulty = newDifficulty.divide(BigInteger.valueOf(retargetTimespan));
 
         if (newDifficulty.compareTo(params.proofOfWorkLimit) > 0) {
             log.info("Difficulty hit proof of work limit: {}", newDifficulty.toString(16));
@@ -878,15 +891,26 @@ public abstract class AbstractBlockChain {
                     receivedDifficulty.toString(16) + " vs " + newDifficulty.toString(16));
                     
     }
+	
     private void checkDifficultyTransitionsNew(StoredBlock storedPrev, Block nextBlock) throws BlockStoreException, VerificationException {
-            checkState(lock.isLocked());
+                 checkState(lock.isLocked());
         Block prev = storedPrev.getHeader();
-
-        int nTargetTimespan =  params.targetTimespan;
-        int interval =(nTargetTimespan / params.TARGET_SPACING);
-
+		
+		int nHeight = (storedPrev.getHeight() + 1);
+		boolean fNewDifficultyProtocol = (nHeight >= CoinDefinition.nDiffChangeTarget);
+		
+        int retargetTimespan = CoinDefinition.TARGET_TIMESPAN;
+		int retargetSpacing =  CoinDefinition.TARGET_SPACING;
+        int retargetInterval = CoinDefinition.INTERVAL;
+		
+		if(fNewDifficultyProtocol) {
+			retargetTimespan = CoinDefinition.TARGET_TIMESPAN_2;
+			retargetSpacing =  CoinDefinition.TARGET_SPACING_2;
+			retargetInterval = CoinDefinition.INTERVAL_2;
+		}	
+			
         // Is this supposed to be a difficulty transition point?
-        if ((storedPrev.getHeight() + 1) % interval != 0)
+        if ((storedPrev.getHeight() + 1) % retargetInterval != 0)
         {
 
             // TODO: Refactor this hack after 0.5 is released and we stop supporting deserialization compatibility.
@@ -901,7 +925,7 @@ public abstract class AbstractBlockChain {
             if (nextBlock.getDifficultyTarget() != prev.getDifficultyTarget())
                 throw new VerificationException("Unexpected change in difficulty at height " + storedPrev.getHeight() +
                         ": " + Long.toHexString(nextBlock.getDifficultyTarget()) + " vs " +
-                        Long.toHexString(prev.getDifficultyTarget()) + ", Interval: "+interval);
+                        Long.toHexString(prev.getDifficultyTarget()) + ", Interval: "+retargetInterval);
             return;
         }
 
@@ -910,9 +934,9 @@ public abstract class AbstractBlockChain {
         long now = System.currentTimeMillis();
         StoredBlock cursor = blockStore.get(prev.getHash());
 
-        int goBack = interval - 1;
-        if (cursor.getHeight()+1 != interval)
-            goBack = interval;
+        int goBack = retargetInterval - 1;
+        if (cursor.getHeight()+1 != retargetInterval)
+            goBack = retargetInterval;
 
         for (int i = 0; i < goBack; i++) {
             if (cursor == null) {
@@ -933,18 +957,19 @@ public abstract class AbstractBlockChain {
         int nActualTimespan = (int) (prev.getTimeSeconds() - blockIntervalAgo.getTimeSeconds());
         // Limit the adjustment step.
 
-        //int nActualTimespanMax = fNewDifficultyProtocol? (nTargetTimespanCurrent*2) : (nTargetTimespanCurrent*4);
-        //int nActualTimespanMin = fNewDifficultyProtocol? (nTargetTimespanCurrent/2) : (nTargetTimespanCurrent/4);
-
-
-        if (nActualTimespan < nTargetTimespan/4)
-            nActualTimespan = nTargetTimespan/4;
-        if (nActualTimespan > nTargetTimespan*4)
-            nActualTimespan = nTargetTimespan*4;
+		if(fNewDifficultyProtocol) {
+		  
+			if (nActualTimespan < (retargetTimespan - (retargetTimespan/4)) ) nActualTimespan = (retargetTimespan - (retargetTimespan/4));
+			if (nActualTimespan > (retargetTimespan + (retargetTimespan/2)) ) nActualTimespan = (retargetTimespan + (retargetTimespan/2));
+		}
+		else {
+			if (nActualTimespan < retargetTimespan/4) nActualTimespan = retargetTimespan/4;
+			if (nActualTimespan > retargetTimespan*4) nActualTimespan = retargetTimespan*4;
+		}
 
         BigInteger newDifficulty = Utils.decodeCompactBits(prev.getDifficultyTarget());
         newDifficulty = newDifficulty.multiply(BigInteger.valueOf(nActualTimespan));
-        newDifficulty = newDifficulty.divide(BigInteger.valueOf(nTargetTimespan));
+        newDifficulty = newDifficulty.divide(BigInteger.valueOf(retargetTimespan));
 
         if (newDifficulty.compareTo(params.proofOfWorkLimit) > 0) {
             log.info("Difficulty hit proof of work limit: {}", newDifficulty.toString(16));
@@ -961,7 +986,6 @@ public abstract class AbstractBlockChain {
         if (newDifficulty.compareTo(receivedDifficulty) != 0)
             throw new VerificationException("Network provided difficulty bits do not match what was calculated: " +
                     receivedDifficulty.toString(16) + " vs " + newDifficulty.toString(16));
-               
     }
     private void checkDifficultyTransitions_original(StoredBlock storedPrev, Block nextBlock) throws BlockStoreException, VerificationException {
              checkState(lock.isLocked());

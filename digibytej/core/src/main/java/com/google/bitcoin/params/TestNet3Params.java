@@ -47,7 +47,7 @@ public class TestNet3Params extends NetworkParameters {
         genesisBlock.setDifficultyTarget(CoinDefinition.testnetGenesisBlockDifficultyTarget);
         genesisBlock.setNonce(CoinDefinition.testnetGenesisBlockNonce);
         spendableCoinbaseDepth = 100;
-        subsidyDecreaseBlockCount = CoinDefinition.subsidyDecreaseBlockCount;
+        //subsidyDecreaseBlockCount = CoinDefinition.subsidyDecreaseBlockCount;
         String genesisHash = genesisBlock.getHashAsString();
         if(CoinDefinition.supportsTestNet)
             checkState(genesisHash.equals(CoinDefinition.testnetGenesisHash));
