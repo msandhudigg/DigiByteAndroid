@@ -56,9 +56,9 @@ public class ViewPagerTabs extends View implements OnPageChangeListener
 		setSaveEnabled(true);
 
 		paint.setTextSize(getResources().getDimension(R.dimen.font_size_tiny));
-		paint.setColor(Color.BLACK);
+		paint.setColor(Color.WHITE);
 		paint.setAntiAlias(true);
-		paint.setShadowLayer(2, 0, 0, Color.WHITE);
+		paint.setShadowLayer(2, 0, 0, Color.BLACK);
 	}
 
 	public void addTabLabels(final int... labelResId)
@@ -72,6 +72,8 @@ public class ViewPagerTabs extends View implements OnPageChangeListener
 			final String label = context.getString(resId);
 
 			final int width = (int) paint.measureText(label);
+			
+			
 
 			if (width > maxWidth)
 				maxWidth = width;
@@ -111,7 +113,7 @@ public class ViewPagerTabs extends View implements OnPageChangeListener
 			final String label = labels.get(i);
 
 			paint.setTypeface(i == pagePosition ? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
-			paint.setColor(i == pagePosition ? Color.BLACK : Color.DKGRAY);
+			paint.setColor(i == pagePosition ? Color.WHITE : Color.WHITE);
 
 			final float x = viewHalfWidth + (maxWidth + spacing) * (i - pageOffset);
 			final float labelWidth = paint.measureText(label);

@@ -79,7 +79,7 @@ import com.google.bitcoin.core.Wallet;
 import com.google.bitcoin.core.Wallet.BalanceType;
 import com.google.bitcoin.core.WalletEventListener;
 //import com.google.bitcoin.net.discovery.DnsDiscovery;
-//import com.google.bitcoin.net.discovery.IrcDiscovery;
+import com.google.bitcoin.net.discovery.IrcDiscovery;
 import com.google.bitcoin.net.discovery.SeedPeers;
 import com.google.bitcoin.net.discovery.PeerDiscovery;
 import com.google.bitcoin.net.discovery.PeerDiscoveryException;
@@ -417,7 +417,8 @@ public class BlockchainServiceImpl extends android.app.Service implements Blockc
 					//Turn off DnsDiscovery, activate SeedPeer discovery
 				  //private final PeerDiscovery normalPeerDiscovery = new DnsDiscovery(Constants.NETWORK_PARAMETERS);
 				  private final PeerDiscovery normalPeerDiscovery = new SeedPeers(Constants.NETWORK_PARAMETERS);
-
+					
+				  
 					@Override
 					public InetSocketAddress[] getPeers(final long timeoutValue, final TimeUnit timeoutUnit) throws PeerDiscoveryException
 					{

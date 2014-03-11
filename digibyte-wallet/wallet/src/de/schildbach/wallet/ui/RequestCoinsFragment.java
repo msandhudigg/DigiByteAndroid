@@ -402,6 +402,7 @@ public final class RequestCoinsFragment extends SherlockFragment
 		final SpannableStringBuilder initiateText = new SpannableStringBuilder(getString(R.string.request_coins_fragment_initiate_request_qr));
 		if (nfcSuccess)
 			initiateText.append(' ').append(getString(R.string.request_coins_fragment_initiate_request_nfc));
+		initiateRequestView.setTextColor(getResources().getColorStateList(R.color.bg_bright));
 		initiateRequestView.setText(initiateText);
 
 		// update bluetooth message

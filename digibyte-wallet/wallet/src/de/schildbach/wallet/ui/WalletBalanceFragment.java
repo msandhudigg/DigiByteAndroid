@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -230,6 +231,7 @@ public final class WalletBalanceFragment extends Fragment
 				viewBalanceBtc.setPrecision(btcPrecision, btcShift);
 				viewBalanceBtc.setPrefix(prefix);
 				viewBalanceBtc.setAmount(balance);
+				
 
 				if (showLocalBalance)
 				{

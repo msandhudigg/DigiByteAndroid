@@ -9,8 +9,8 @@
 		android:layout_height="match_parent"
 		android:layout_weight="1"
 		android:background="@color/bg_less_bright"
-		android:orientation="vertical" >
-
+		android:orientation="vertical" >		
+		
 		<TextView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -18,9 +18,10 @@
 			android:layout_marginLeft="@dimen/list_entry_padding_horizontal"
 			android:layout_marginRight="@dimen/list_entry_padding_horizontal"
 			android:layout_marginTop="@dimen/list_entry_padding_vertical"
-			android:shadowColor="@color/bg_bright"
+			android:shadowColor="@color/fg_significant"
 			android:shadowRadius="1"
 			android:text="@string/address_book_list_receiving_title"
+			android:textColor="@color/bg_bright"
 			android:textSize="@dimen/font_size_normal"
 			android:textStyle="bold" />
 
@@ -59,9 +60,10 @@
 			android:layout_marginLeft="@dimen/list_entry_padding_horizontal"
 			android:layout_marginRight="@dimen/list_entry_padding_horizontal"
 			android:layout_marginTop="@dimen/list_entry_padding_vertical"
-			android:shadowColor="@color/bg_bright"
+			android:shadowColor="@color/fg_significant"
 			android:shadowRadius="1"
 			android:text="@string/address_book_list_sending_title"
+			android:textColor="@color/bg_bright"
 			android:textSize="@dimen/font_size_normal"
 			android:textStyle="bold" />
 

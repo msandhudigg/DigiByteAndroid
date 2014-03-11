@@ -18,9 +18,10 @@
 			android:layout_marginLeft="@dimen/list_entry_padding_horizontal"
 			android:layout_marginRight="@dimen/list_entry_padding_horizontal"
 			android:layout_marginTop="@dimen/list_entry_padding_vertical"
-			android:shadowColor="@color/bg_bright"
+			android:shadowColor="@color/fg_significant"
 			android:shadowRadius="1"
 			android:text="@string/network_monitor_peer_list_title"
+			android:textColor="@color/bg_bright"
 			android:textSize="@dimen/font_size_normal"
 			android:textStyle="bold" />
 
@@ -59,12 +60,13 @@
 			android:layout_marginLeft="@dimen/list_entry_padding_horizontal"
 			android:layout_marginRight="@dimen/list_entry_padding_horizontal"
 			android:layout_marginTop="@dimen/list_entry_padding_vertical"
-			android:shadowColor="@color/bg_bright"
+			android:shadowColor="@color/fg_significant"
 			android:shadowRadius="1"
 			android:text="@string/network_monitor_block_list_title"
+			android:textColor="@color/bg_bright"
 			android:textSize="@dimen/font_size_normal"
 			android:textStyle="bold" />
-
+			
 		<FrameLayout
 			android:layout_width="match_parent"
 			android:layout_height="0px"

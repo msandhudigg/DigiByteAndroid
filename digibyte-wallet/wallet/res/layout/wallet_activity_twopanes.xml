@@ -9,7 +9,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="0px"
 		android:layout_weight="1"
-		android:background="#d8d8e0" >
+		android:background="#ffffffff" >
 
 		<TableRow>
 
@@ -31,9 +31,10 @@
 
 			<FrameLayout
 				android:layout_weight="1"
-				android:background="#efefef"
+				android:background="#ffffff"
 				android:foreground="@drawable/fragment_shadow_horizontal_light"
-				android:foregroundGravity="top|fill_horizontal" >
+				android:foregroundGravity="top|fill_horizontal" 
+				android:textColor="#ffffff" >
 
 				<fragment
 					android:id="@+id/exchange_rates_fragment"

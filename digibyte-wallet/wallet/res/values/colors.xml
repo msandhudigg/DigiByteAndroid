@@ -9,12 +9,14 @@
 
 	<!-- background -->
 	<color name="bg_bright">#ffffffff</color>
-	<color name="bg_less_bright">#ffe8e8f0</color>
-	<color name="bg_panel">#ffd8d8e0</color>
-	<color name="bg_form">#ffe8e8f0</color>
+	<color name="bg_less_bright">#ff0066cc</color>
+	<color name="bg_panel">#ff0066cc</color>
+	<color name="bg_form">#ff0066cc</color>
 	<color name="bg_list">#40ffffff</color>
-	<color name="bg_list_selected">#40808090</color>
-
+	<color name="bg_list_selected">#409a9aa6</color>
+	<color name="shadow_text_color">#ffdedede</color>
+	<color name="digibyte_dark_blue">#ff003366</color>
+	
 	<!-- scanner -->
 	<color name="scan_mask">#60000000</color>
 	<color name="scan_laser">#cc0000</color>

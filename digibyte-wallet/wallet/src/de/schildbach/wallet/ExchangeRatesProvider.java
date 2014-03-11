@@ -235,39 +235,77 @@ public class ExchangeRatesProvider extends ContentProvider
         //final Map<String, ExchangeRate> rates = new TreeMap<String, ExchangeRate>();
         // Keep the LTC rate around for a bit
         Double btcRate = 0.0;
-        String currencyCryptsy = CoinDefinition.cryptsyMarketCurrency;
-        String urlCryptsy = "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid="+ CoinDefinition.cryptsyMarketId;
-
+        String urlMintpal = "https://api.mintpal.com/market/stats/DGB/BTC";
 
 
 
         try {
             // final String currencyCode = currencies[i];
-            final URL URLCryptsy = new URL(urlCryptsy);
-            final URLConnection connectionCryptsy = URLCryptsy.openConnection();
-            connectionCryptsy.setConnectTimeout(Constants.HTTP_TIMEOUT_MS * 2);
-            connectionCryptsy.setReadTimeout(Constants.HTTP_TIMEOUT_MS * 2);
-            connectionCryptsy.connect();
+            final URL URLMintpal = new URL(urlMintpal);
+            final URLConnection connectionMintpal = URLMintpal.openConnection();
+            connectionMintpal.setConnectTimeout(Constants.HTTP_TIMEOUT_MS * 2);
+            connectionMintpal.setReadTimeout(Constants.HTTP_TIMEOUT_MS * 2);
+            connectionMintpal.connect();
 
-            final StringBuilder contentCryptsy = new StringBuilder();
+            final StringBuilder contentMintpal = new StringBuilder();
 
             Reader reader = null;
             try
             {
-                reader = new InputStreamReader(new BufferedInputStream(connectionCryptsy.getInputStream(), 1024));
-                Io.copy(reader, contentCryptsy);
-                final JSONObject head = new JSONObject(contentCryptsy.toString());
-                JSONObject returnObject = head.getJSONObject("return");
-                JSONObject markets = returnObject.getJSONObject("markets");
-                JSONObject coinInfo = markets.getJSONObject(CoinDefinition.coinTicker);
+                reader = new InputStreamReader(new BufferedInputStream(connectionMintpal.getInputStream(), 1024));
+                Io.copy(reader, contentMintpal);
+                JSONArray jsonArray = new JSONArray(contentMintpal.toString());
+				
+				JSONObject c = jsonArray.getJSONObject(0);
+                //log.warn("\n\njsonArray: " + jsonArray);
+
+                //int count = jsonArray.length(); // get totalCount of all jsonObjects
+                //for(int i=0 ; i< count; i++){   // iterate through jsonArray
+				
+				double btc24hhigh = 0.0;
+				double btc24hlow = 0.0;
+				
+				double high_24hour = c.getDouble("24hhigh");  // get jsonObject @
+				double low_24hour = c.getDouble("24hlow");  // get jsonObject @
+                
+				//log.warn("jsonObject " + i + ": " + jsonObject);
+                //}
+                //JSONObject hhigh24 = head.getDouble("24hhigh");
+                //JSONObject hlow24 = head.getDouble("24hlow");
+				
+				btc24hhigh += high_24hour;
+				btc24hlow += low_24hour;
+				
+
+                
 
 
+                /*for (Object o : head)
+                {
+                    JSONObject stats = (JSONObject) o;
 
-                JSONArray recenttrades = coinInfo.getJSONArray("recenttrades");
+                    btc24hhigh += stats.getDouble("24hhigh");
+                    btc24hlow += stats.getDouble("24hlow");
 
+
+                }
+                  */
+                //JSONObject last_price = head.getJSONObject("last_price");
+				//JSONObject high_24hour = head.getJSONObject("24hhigh");
+				//JSONObject low_24hour = head.getJSONObject("24hlow");
+			
+				
+				//double btc24hhigh = 0.0 + head.getDouble("24hhigh");
+                //double btc24hlow = 0.0 + head.getDouble("24hlow");
+
+				log.warn("24 hour high: " + btc24hhigh);
+				log.warn("24 hour low: "  + btc24hlow);
+                //JSONArray recenttrades = coinInfo.getJSONArray("recenttrades");
+				
+				/*
                 double btcTraded = 0.0;
                 double coinTraded = 0.0;
-
+				
                 for(int i = 0; i < recenttrades.length(); ++i)
                 {
                     JSONObject trade = (JSONObject)recenttrades.get(i);
@@ -276,8 +314,9 @@ public class ExchangeRatesProvider extends ContentProvider
                     coinTraded += trade.getDouble("quantity");
 
                 }
-
-                Double averageTrade = btcTraded / coinTraded;
+				*/
+				
+                Double averageTrade = (btc24hhigh + btc24hlow) / 2;
 
 
 
@@ -288,8 +327,9 @@ public class ExchangeRatesProvider extends ContentProvider
                 //String euros = String.format("%.7f", averageTrade);
                 // Fix things like 3,1250
                 //euros = euros.replace(",", ".");
-                //rates.put(currencyCryptsy, new ExchangeRate(currencyCryptsy, Utils.toNanoCoins(euros), URLCryptsy.getHost()));
-                if(currencyCryptsy.equalsIgnoreCase("BTC")) btcRate = averageTrade;
+                //rates.put(currencyMintpal, new ExchangeRate(currencyMintpal, Utils.toNanoCoins(euros), URLMintpal.getHost()));
+                //if(currencyMintpal.equalsIgnoreCase("BTC")) 
+				btcRate = averageTrade;
 
             }
             finally
