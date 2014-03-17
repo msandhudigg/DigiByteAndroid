@@ -90,7 +90,8 @@ public class SeedPeers implements PeerDiscovery {
     public static int[] seedAddrs =
             {			// node ips from config file.  IP's are backwards with no dot seperators.
             			//  74.208.230.160->0xA0E6D04A   A0=160  E6=230  D0=208  4A=74 
-                   0xA0E6D04A, 0x797DFAD8, 0xB7DA9BB8, 0x5B19DC1F, 0x3D177718, 0xE7C1C446, 0xF17662C6,0x73CC048E,
+                    0x797DFAD8, 0xA0E6D04A, 0xCACC704A, 0xDC20042E, 0x586D1BC6,
+                    0x2124CC36, 0x8CB829C6, 0xB65E4C90, 0xBC32555F, 0x46F09FA2,
             };
     
     public void shutdown() {
